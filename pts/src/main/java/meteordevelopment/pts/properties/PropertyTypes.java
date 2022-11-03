@@ -1,6 +1,9 @@
 package meteordevelopment.pts.properties;
 
 import meteordevelopment.pts.utils.*;
+import meteordevelopment.pts.utils.transition.Transition;
+import meteordevelopment.pts.utils.transition.TransitionProperty;
+import meteordevelopment.pts.utils.transition.TransitionTimingFunction;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -114,6 +117,31 @@ public class PropertyTypes {
 
                 types.add(ValueType.Color);
                 values.add(value.bottomLeft);
+            })
+            .build());
+
+    public static final PropertyType<Transition> TRANSITION_TYPE = add(new PropertyType.Builder<>("Transition", () -> new Transition(TransitionProperty.None, 0.0, TransitionTimingFunction.LINEAR, 0.0))
+            .constructor(values -> {
+                TransitionProperty property = TransitionProperty.get((String) values[0]);
+                TransitionTimingFunction timingFunction = TransitionTimingFunction.get((String) values[2]);
+                return new Transition(property, (double) values[1], timingFunction, (double) values[3]);
+            }, ValueType.Identifier, ValueType.Unit, ValueType.Identifier, ValueType.Unit)
+            .accessor("transition-property", (target, values) -> target.property = TransitionProperty.get((String) values[0]), ValueType.Identifier)
+            .accessor("transition-duration", (target, values) -> target.duration = (double) values[0], ValueType.Unit)
+            .accessor("transition-timing-function", (target, values) -> target.timingFunction = TransitionTimingFunction.get((String) values[0]), ValueType.Identifier)
+            .accessor("transition-delay", (target, values) -> target.delay = (double) values[0], ValueType.Unit)
+            .decomposer((value, types, values) -> {
+                types.add(ValueType.Identifier);
+                values.add(value.property);
+
+                types.add(ValueType.Unit);
+                values.add(value.duration);
+
+                types.add(ValueType.Identifier);
+                values.add(value.timingFunction);
+
+                types.add(ValueType.Unit);
+                values.add(value.delay);
             })
             .build());
 

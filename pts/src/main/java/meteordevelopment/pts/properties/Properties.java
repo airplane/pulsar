@@ -1,6 +1,8 @@
 package meteordevelopment.pts.properties;
 
 import meteordevelopment.pts.utils.*;
+import meteordevelopment.pts.utils.transition.Transition;
+import meteordevelopment.pts.utils.transition.TransitionProperty;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,6 +40,9 @@ public class Properties {
 
     public static final Property<String> ICON = add(new Property<>("icon", STRING_TYPE));
     public static final Property<String> ICON_PATH = add(new Property<>("icon-path", STRING_TYPE));
+
+
+    public static final Property<Transition> TRANSITION = add(new Property<>("transition", TRANSITION_TYPE));
 
     private static <T> Property<T> add(Property<T> property) {
         PROPERTIES.put(property.name(), property);
