@@ -126,10 +126,10 @@ public class PropertyTypes {
                 TransitionTimingFunction timingFunction = TransitionTimingFunction.get((String) values[2]);
                 return new Transition(property, (double) values[1], timingFunction, (double) values[3]);
             }, ValueType.Identifier, ValueType.Unit, ValueType.Identifier, ValueType.Unit)
-            .accessor("transition-property", (target, values) -> target.property = TransitionProperty.get((String) values[0]), ValueType.Identifier)
-            .accessor("transition-duration", (target, values) -> target.duration = (double) values[0], ValueType.Unit)
-            .accessor("transition-timing-function", (target, values) -> target.timingFunction = TransitionTimingFunction.get((String) values[0]), ValueType.Identifier)
-            .accessor("transition-delay", (target, values) -> target.delay = (double) values[0], ValueType.Unit)
+            .accessor("property", (target, values) -> target.property = TransitionProperty.get((String) values[0]), ValueType.Identifier)
+            .accessor("duration", (target, values) -> target.duration = (double) values[0], ValueType.Unit)
+            .accessor("timing-function", (target, values) -> target.timingFunction = TransitionTimingFunction.get((String) values[0]), ValueType.Identifier)
+            .accessor("delay", (target, values) -> target.delay = (double) values[0], ValueType.Unit)
             .decomposer((value, types, values) -> {
                 types.add(ValueType.Identifier);
                 values.add(value.property);
